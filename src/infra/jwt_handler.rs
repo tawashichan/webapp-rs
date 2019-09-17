@@ -1,18 +1,19 @@
 
-use frank_jwt::{encode,Algorithm};
+use frank_jwt::{encode,decode,Algorithm};
 use serde_json::{json};
 
 use crate::logic::login::token::{TokenString};
+use crate::infra::key_pair_generator::{KeyPair};
 use crate::logic::login::jwt_handler::{TJWTHandler};
 
 pub struct JWTHandler {
-    pub_key_bytes: Vec<Vec<u8>>
+    key_pairs: Vec<KeyPair>
 }
 
 impl JWTHandler {
-    pub fn new(pub_key_bytes: Vec<Vec<u8>>) -> Self {
+    pub fn new(key_pairs: Vec<KeyPair>) -> Self {
         JWTHandler{
-            pub_key_bytes,
+            key_pairs,
         }
     }
 }
@@ -21,7 +22,7 @@ impl TJWTHandler for JWTHandler {
     fn generate(&self) -> Result<TokenString,()>{ 
         let header = json!({});
         let payload = json!({});
-        let token = encode(header, &self.pub_key_bytes[0],&payload,Algorithm::RS256).unwrap();
+        let token = encode(header, self.key_pairs[0].private_key_byte.as_u8(),&payload,Algorithm::RS256).unwrap();
         Ok(TokenString(token))
     }
 }
