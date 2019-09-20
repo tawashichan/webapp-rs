@@ -1,14 +1,13 @@
 use crate::logic::login::jwt_handler::{TJWTHandler};
 use crate::logic::login::token::{TokenString};
 
-// 型パラメータまみれになるのを防ぐためにtrait objectを使ったが,動的ヂスパッチになりパフォーマンス上の問題があるためproductionで使って良いか微妙
-pub struct LoginService {
-    jwt_handler: Box<dyn TJWTHandler> //JWTHandler
+pub struct LoginService<'a> {
+    jwt_handler: &'a dyn TJWTHandler
 }
 
-impl LoginService {
+impl <'a>LoginService<'a> {
 
-    pub fn new(jwt_handler: Box<dyn TJWTHandler>) -> Self {
+    pub fn new(jwt_handler: &'a dyn TJWTHandler) -> Self {
         LoginService{
             jwt_handler,
         }

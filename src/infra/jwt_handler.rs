@@ -11,7 +11,7 @@ pub struct JWTHandler {
 }
 
 impl JWTHandler {
-    pub fn new(key_pairs: Vec<KeyPair>) -> Self {
+    pub const fn new(key_pairs: Vec<KeyPair>) -> Self {
         JWTHandler{
             key_pairs,
         }
