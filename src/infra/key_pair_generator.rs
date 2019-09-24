@@ -28,8 +28,10 @@ pub struct KeyPair{
 struct KeyPairGenerator {}
 
 impl KeyPairGenerator {
-    fn generate(&self,private_key_byte: PrivateKeyByte) {
-        let key_pair = RsaKeyPair::from_pkcs8(private_key_byte.as_u8()).unwrap();
+    fn generate(&self,private_key_byte: PrivateKeyByte) -> KeyPair {
+        //RsaKeyPair::fr
+        //RsaKeyPair::from_pkcs8(private_key_byte.as_u8()).unwrap()
         //key_pair.
+        unimplemented!()
     }
 }

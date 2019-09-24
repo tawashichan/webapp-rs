@@ -1,19 +1,25 @@
 use crate::logic::login::jwt_handler::{TJWTHandler};
 use crate::logic::login::token::{TokenString};
+use crate::logic::repository::user::TUserRepository;
 
 pub struct LoginService<'a> {
-    jwt_handler: &'a dyn TJWTHandler
+    jwt_handler: &'a dyn TJWTHandler,
+    user_repository: &'a dyn TUserRepository
 }
 
 impl <'a>LoginService<'a> {
 
-    pub fn new(jwt_handler: &'a dyn TJWTHandler) -> Self {
+    pub fn new(
+        jwt_handler: &'a dyn TJWTHandler,
+        user_repository: &'a dyn TUserRepository
+        ) -> Self {
         LoginService{
             jwt_handler,
+            user_repository,
         }
     }
 
-    fn login(&self) -> Result<TokenString,()>{
+    pub fn login(&self) -> Result<TokenString,()>{
         self.jwt_handler.generate()
     }
 }

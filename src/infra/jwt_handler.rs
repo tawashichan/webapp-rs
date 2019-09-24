@@ -22,7 +22,7 @@ impl TJWTHandler for JWTHandler {
     fn generate(&self) -> Result<TokenString,()>{ 
         let header = json!({});
         let payload = json!({});
-        let token = encode(header, self.key_pairs[0].private_key_byte.as_u8(),&payload,Algorithm::RS256).unwrap();
+        let token = encode(header, self.key_pairs[0].private_key_byte.as_u8(),&payload,Algorithm::ES512).unwrap();
         Ok(TokenString(token))
     }
 }
