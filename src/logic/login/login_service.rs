@@ -19,7 +19,10 @@ impl <'a>LoginService<'a> {
         }
     }
 
-    pub fn login(&self) -> Result<TokenString,()>{
-        self.jwt_handler.generate()
+    pub fn login(&self) /*-> Result<TokenString,()>*/{
+        let user = self.user_repository.find_by_id("1".to_string());
+        //self.jwt_handler.generate()
     }
+
+
 }

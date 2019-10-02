@@ -20,5 +20,6 @@ fn main() {
 
     let jwt_handler: JWTHandler = JWTHandler::new(vec![]);
     let login_service = LoginService::new(&jwt_handler,&user_repository);
+    login_service.login();
     println!("Hello, world!");
 }
